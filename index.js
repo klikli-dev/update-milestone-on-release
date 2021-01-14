@@ -42,6 +42,7 @@ function doesVersionMatch(milestone, release) {
 	const milestoneVersion = milestone.title.match(/\d+\.\d+\.\d+/);
 	//for our mods that contain both the MC version and the mod version we need to find all matches, and use the 2nd one.
 	const releaseVersion = release.tag_name.match(/\d+\.\d+\.\d+/g);
+	console.log("doesVersionMatch: ", milestoneVersion, releaseVersion);
 	return milestoneVersion !== null && releaseVersion !== null && milestoneVersion[0] === releaseVersion[1];
 }
 
