@@ -39,11 +39,14 @@ async function updateMilestoneWithRelease(milestone) {
 }
 
 function doesVersionMatch(milestone, release) {
+	//milestone version: "1.16.5-1.20.0" (historically "1.20.0")
+	//release version: "release/v1.16.5-1.20.0"
 	const milestoneVersion = milestone.title.match(/\d+\.\d+\.\d+/);
-	//for our mods that contain both the MC version and the mod version we need to find all matches, and use the 2nd one.
 	const releaseVersion = release.tag_name.match(/\d+\.\d+\.\d+/g);
 	console.log("doesVersionMatch: ", milestoneVersion, releaseVersion);
-	return milestoneVersion !== null && releaseVersion !== null && milestoneVersion[0] === releaseVersion[1];
+
+	//we need to compare both semvers that we find: MC version and mod version
+	return milestoneVersion !== null && releaseVersion !== null && milestoneVersion[0] === releaseVersion[0] && milestoneVersion[1] === releaseVersion[1];
 }
 
 octokit.issues.listMilestonesForRepo({ owner: owner, repo: repo }).then((payload) => {
