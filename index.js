@@ -41,7 +41,7 @@ async function updateMilestoneWithRelease(milestone) {
 function doesVersionMatch(milestone, release) {
 	//milestone version: "1.16.5-1.20.0" (historically "1.20.0")
 	//release version: "release/v1.16.5-1.20.0"
-	const milestoneVersion = milestone.title.match(/\d+\.\d+\.\d+/);
+	const milestoneVersion = milestone.title.match(/\d+\.\d+\.\d+/g);
 	const releaseVersion = release.tag_name.match(/\d+\.\d+\.\d+/g);
 	console.log("doesVersionMatch: ", milestoneVersion, releaseVersion);
 
